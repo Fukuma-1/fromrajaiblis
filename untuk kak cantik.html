@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Untuk Kamu</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #000;
+      height: 100vh;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .intro {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #111;
+      flex-direction: column;
+    }
+
+    .intro button {
+      padding: 20px 40px;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 15px;
+      background-color: #ffaad4;
+      color: #222;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 170, 212, 0.4);
+      transition: transform 0.3s;
+    }
+
+    .intro button:hover {
+      transform: scale(1.05);
+    }
+
+    .main-content {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('https://i.ibb.co/8gSwhs7/pixel-sky.png');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .content {
+      background: rgba(255, 192, 203, 0.3);
+      padding: 30px;
+      border-radius: 25px;
+      backdrop-filter: blur(5px);
+      animation: fadeIn 1s ease;
+    }
+
+    .title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .lyrics {
+      font-size: 1.6em;
+      margin-bottom: 30px;
+      min-height: 50px;
+      transition: opacity 1s ease;
+    }
+
+    .apology {
+      font-size: 1.2em;
+      color: #ffecec;
+      font-style: italic;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <!-- Intro screen -->
+  <div class="intro" id="introScreen">
+    <button onclick="startRomance()">Klik pretty 💗</button>
+  </div>
+
+  <!-- Main romantic screen -->
+  <div class="main-content" id="mainContent">
+    <div class="content">
+      <h1 class="title">Karena Kamu Cantik 💖</h1>
+      <p id="lyrics" class="lyrics"></p>
+      <p class="apology">maaf ya kalau aku sering bikin kakak marah. you perfect besty 🌙</p>
+    </div>
+  </div>
+
+  <script>
+    const lyricsLines = [
+      ".....",
+      "Karena kamu cantik",
+      "kan ku beri segalanya apa yang ku punya",
+      "dan hatimu baik",
+      "seempurnalah duniaku saat kau di sisiku",
+      "bukan karena make up di wajahmu",
+      "atau lipstik merah itu",
+      "lembut hatimu tutur katamu",
+      "terciptalah cinta yang ku puja"
+    ];
+
+    let currentLine = 0;
+    const lyricsEl = document.getElementById('lyrics');
+
+    function showLyrics() {
+      lyricsEl.style.opacity = 0;
+      setTimeout(() => {
+        lyricsEl.textContent = lyricsLines[currentLine];
+        lyricsEl.style.opacity = 1;
+        currentLine = (currentLine + 1) % lyricsLines.length;
+      }, 500);
+    }
+
+    function startRomance() {
+      document.getElementById("introScreen").style.display = "none";
+      document.getElementById("mainContent").style.display = "flex";
+      document.getElementById("bgMusic").play();
+      showLyrics();
+      setInterval(showLyrics, 4000);
+    }
+  </script>
+
+</body>
+</html>
